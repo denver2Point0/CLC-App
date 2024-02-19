@@ -180,9 +180,12 @@ class CutlistOptimizerGUI:
 
     def determine_project_folder(self):
         project_id = self.project_id.get().strip()
-        project_folder = os.path.join(self.output_folder_path, project_id) if project_id else self.get_project_folder(self.output_folder_path)
+        output_folder_path_str = self.output_folder_path.get()
+        project_folder = os.path.join(output_folder_path_str, project_id) if project_id else os.path.join(output_folder_path_str, "default_project_folder")
+
+       # project_folder = os.path.join(self.output_folder_path, project_id) if project_id else self.get_project_folder(self.output_folder_path)
         os.makedirs(project_folder, exist_ok=True)
-        return project_folder
+        
 
     def create_and_export_cutlists(self, cut_list, plywood_size, gap, project_folder):
         # Group parts based on material
